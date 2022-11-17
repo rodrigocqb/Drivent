@@ -7,21 +7,17 @@ export type ViaCEPAddress = {
   logradouro: string;
   complemento: string;
   bairro: string;
-  cidade: string;
+  localidade: string;
   uf: string;
 };
 
-export type ViaCEPAddressEntity = {
-  cep: string;
+export type AddressEnrollment = {
   logradouro: string;
   complemento: string;
   bairro: string;
-  localidade: string;
+  cidade: string;
   uf: string;
-  ibge: string;
-  gia: string;
-  ddd: string;
-  siafi: string;
+  error?: string;
 };
 
 export type RequestError = {
