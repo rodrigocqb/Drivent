@@ -11,7 +11,7 @@ async function getAddressFromCEP(cep: string): Promise<AddressEnrollment> {
   const result = await getAddress(cep);
 
   if (!result) {
-    throw notFoundError(); //lançar -> pro arquivo que chamou essa função
+    throw notFoundError();
   }
 
   const { bairro, localidade, uf, complemento, logradouro } = result;
