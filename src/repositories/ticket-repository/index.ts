@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { TicketStatus, TicketType } from "@prisma/client";
+import { TicketStatus } from "@prisma/client";
 
 async function findTicketTypes() {
   return prisma.ticketType.findMany();
