@@ -27,7 +27,7 @@ export async function getTicketByUser(req: AuthenticatedRequest, res: Response) 
 
 export async function postCreateTicket(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const { ticketTypeId } = req.body;
+  const { ticketTypeId } = req.body as { ticketTypeId: number };
 
   try {
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);
