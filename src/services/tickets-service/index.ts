@@ -22,6 +22,19 @@ async function getTicketByEnrollment(enrollmentId: number): Promise<
   return ticket;
 }
 
-const ticketsService = { getTicketTypes, getTicketByEnrollment };
+async function createTicketWithEnrollmentAndTicketType(
+  enrollmentId: number,
+  ticketTypeId: number,
+): Promise<
+  Ticket & {
+    TicketType: TicketType;
+  }
+> {
+  const ticket = await ticketRepository.createTicket(enrollmentId, ticketTypeId);
+
+  return ticket;
+}
+
+const ticketsService = { getTicketTypes, getTicketByEnrollment, createTicketWithEnrollmentAndTicketType };
 
 export default ticketsService;
