@@ -2,11 +2,26 @@ import { notFoundError } from "@/errors";
 import ticketRepository from "@/repositories/ticket-repository";
 import { TicketType, Ticket } from "@prisma/client";
 
-async function getTicketTypes() {
-  const ticketTypes: TicketType[] = await ticketRepository.findTicketTypes();
+async function getTicketTypes(): Promise<TicketType[]> {
+  const ticketTypes = await ticketRepository.findTicketTypes();
+
   return ticketTypes;
 }
 
-const ticketsService = { getTicketTypes };
+async function getTicketByEnrollment(enrollmentId: number): Promise<
+  Ticket & {
+    TicketType: TicketType;
+  }
+> {
+  const ticket = await ticketRepository.findTicketByEnrollmentId(enrollmentId);
+
+  if (!ticket) {
+    throw notFoundError();
+  }
+
+  return ticket;
+}
+
+const ticketsService = { getTicketTypes, getTicketByEnrollment };
 
 export default ticketsService;
