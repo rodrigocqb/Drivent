@@ -35,10 +35,6 @@ export async function postCreatePayment(req: AuthenticatedRequest, res: Response
   const { ticketId, cardData } = req.body as PaymentBody;
 
   try {
-    if (!ticketId || !cardData) {
-      throw requestError(400, "BadRequestError");
-    }
-
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);
     const payment = await paymentsService.createPaymentWithTicketIdAndCardData(enrollment.id, ticketId, cardData);
 
@@ -50,6 +46,5 @@ export async function postCreatePayment(req: AuthenticatedRequest, res: Response
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);
     }
-    return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
