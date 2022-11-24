@@ -12,7 +12,7 @@ export async function getPaymentByTicketId(req: AuthenticatedRequest, res: Respo
 
   try {
     if (!ticketId) {
-      throw requestError(400, "BadRequestError");
+      throw requestError(httpStatus.BAD_REQUEST, "BadRequestError");
     }
 
     const enrollment = await enrollmentsService.getOneWithAddressByUserId(userId);

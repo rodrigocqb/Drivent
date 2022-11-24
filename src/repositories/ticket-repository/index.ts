@@ -51,12 +51,26 @@ async function updateTicketStatus(id: number) {
   });
 }
 
+async function findTicketByUserId(userId: number) {
+  return prisma.ticket.findFirst({
+    where: {
+      Enrollment: {
+        userId,
+      },
+    },
+    include: {
+      TicketType: true,
+    },
+  });
+}
+
 const ticketRepository = {
   findTicketTypes,
   findTicketByEnrollmentId,
   createTicket,
   findTicketById,
   updateTicketStatus,
+  findTicketByUserId,
 };
 
 export default ticketRepository;
