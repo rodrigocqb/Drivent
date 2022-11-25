@@ -18,14 +18,14 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
   }
 }
 
-export async function getRoomsByHotelId(req: AuthenticatedRequest, res: Response) {
+export async function getHotelWithRoomsByHotelId(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const hotelId = Number(req.params.hotelId);
 
   try {
-    const rooms = await hotelsService.getRoomsByHotelId(userId, hotelId);
+    const hotel = await hotelsService.getHotelWithRoomsByHotelId(userId, hotelId);
 
-    return res.status(httpStatus.OK).send(rooms);
+    return res.status(httpStatus.OK).send(hotel);
   } catch (error) {
     if (error.name === "NotFoundError") {
       return res.sendStatus(httpStatus.NOT_FOUND);

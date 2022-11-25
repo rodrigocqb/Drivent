@@ -29,20 +29,25 @@ async function getHotels(userId: number): Promise<Hotel[]> {
   return hotels;
 }
 
-async function getRoomsByHotelId(userId: number, hotelId: number): Promise<Room[]> {
+async function getHotelWithRoomsByHotelId(
+  userId: number,
+  hotelId: number,
+): Promise<
+  Hotel & {
+    Rooms: Room[];
+  }
+> {
   await checkUserTicketData(userId);
 
-  const hotel = await hotelRepository.findHotelById(hotelId);
+  const hotel = await hotelRepository.findHotelWithRoomsById(hotelId);
 
   if (!hotel) {
     throw notFoundError();
   }
 
-  const rooms = await hotelRepository.findRoomsByHotelId(hotelId);
-
-  return rooms;
+  return hotel;
 }
 
-const hotelsService = { getHotels, getRoomsByHotelId };
+const hotelsService = { getHotels, getHotelWithRoomsByHotelId };
 
 export default hotelsService;
