@@ -49,7 +49,7 @@ describe("GET /hotels", () => {
   });
 
   describe("when token is valid", () => {
-    it("should respond with status 404 when user doesnt have an enrollment yet", async () => {
+    it("should respond with status 404 when user does not have an enrollment yet", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
 
@@ -58,7 +58,7 @@ describe("GET /hotels", () => {
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
 
-    it("should respond with status 404 when user doesnt have a ticket yet", async () => {
+    it("should respond with status 404 when user does not have a ticket yet", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       await createEnrollmentWithAddress(user);
@@ -194,7 +194,7 @@ describe("GET /hotels/:hotelId", () => {
       expect(response.status).toBe(httpStatus.BAD_REQUEST);
     });
 
-    it("should respond with status 404 when user doesnt have an enrollment yet", async () => {
+    it("should respond with status 404 when user does not have an enrollment yet", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
 
@@ -205,7 +205,7 @@ describe("GET /hotels/:hotelId", () => {
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
 
-    it("should respond with status 404 when user doesnt have a ticket yet", async () => {
+    it("should respond with status 404 when user does not have a ticket yet", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       await createEnrollmentWithAddress(user);
