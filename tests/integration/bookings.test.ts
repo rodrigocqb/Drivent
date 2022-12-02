@@ -337,7 +337,7 @@ describe("POST /booking", () => {
 
         expect(response.status).toBe(httpStatus.OK);
         expect(response.body).toEqual({
-          bookingId: expect.any(Number),
+          id: expect.any(Number),
           Room: {
             id: room.id,
             name: room.name,
@@ -692,7 +692,7 @@ describe("PUT /booking/:bookingId", () => {
 
       expect(response.status).toBe(httpStatus.OK);
       expect(response.body).toEqual({
-        bookingId: expect.any(Number),
+        id: expect.any(Number),
         Room: {
           id: room.id,
           name: room.name,
@@ -725,7 +725,7 @@ describe("PUT /booking/:bookingId", () => {
 
       const updatedBooking = await prisma.booking.findFirst({ where: { roomId: room.id } });
 
-      expect(response.body.bookingId).toBe(updatedBooking.id);
+      expect(response.body.id).toBe(updatedBooking.id);
     });
   });
 });
