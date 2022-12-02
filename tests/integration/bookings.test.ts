@@ -365,11 +365,11 @@ describe("PUT /booking/:bookingId", () => {
   });
 
   describe("when token is valid", () => {
-    it("should respond with status 400 if bookingId param is missing", async () => {
+    it("should respond with status 400 if bookingId param is not a number", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
 
-      const response = await server.put("/booking").set("Authorization", `Bearer ${token}`).send({ roomId: 1 });
+      const response = await server.put("/booking/a").set("Authorization", `Bearer ${token}`).send({ roomId: 1 });
 
       expect(response.status).toBe(httpStatus.BAD_REQUEST);
     });
@@ -393,7 +393,7 @@ describe("PUT /booking/:bookingId", () => {
       const ticketType = await createTicketType(isRemote, includesHotel);
       await createTicket(userEnrollment.id, ticketType.id, TicketStatus.PAID);
 
-      const roomId = 3;
+      const roomId = faker.datatype.number({ min: 1 });
 
       const bookingId = 0;
 
@@ -415,7 +415,7 @@ describe("PUT /booking/:bookingId", () => {
       const ticketType = await createTicketType(isRemote, includesHotel);
       await createTicket(userEnrollment.id, ticketType.id, TicketStatus.PAID);
 
-      const roomId = 3;
+      const roomId = faker.datatype.number({ min: 1 });
 
       const bookingId = faker.datatype.number({ min: 1 });
 

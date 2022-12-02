@@ -1,4 +1,3 @@
-import faker from "@faker-js/faker";
 import { prisma } from "@/config";
 import { Room, User } from "@prisma/client";
 import { createUser } from "./users-factory";
