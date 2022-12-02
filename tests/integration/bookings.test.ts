@@ -427,7 +427,7 @@ describe("PUT /booking/:bookingId", () => {
       expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
 
-    it("should respond with status 403 user doesn't own given booking - valid partition (bookingId)", async () => {
+    it("should respond with status 401 user doesn't own given booking - valid partition (bookingId)", async () => {
       const user = await createUser();
       const token = await generateValidToken(user);
       const userEnrollment = await createEnrollmentWithAddress(user);
@@ -451,7 +451,7 @@ describe("PUT /booking/:bookingId", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ roomId: room.id });
 
-      expect(response.status).toBe(httpStatus.FORBIDDEN);
+      expect(response.status).toBe(httpStatus.UNAUTHORIZED);
     });
 
     it("should respond with status 400 when roomId is invalid - invalid partition (roomId)", async () => {

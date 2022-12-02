@@ -14,3 +14,19 @@ export async function getBookingWithRoomByUserId(req: AuthenticatedRequest, res:
     }
   }
 }
+
+export async function postCreateBooking(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  const { roomId } = req.body as { roomId: number };
+  try {
+    const booking = await bookingsService.createBookingWithUserId(userId, roomId);
+    return res.status(httpStatus.OK).send(booking);
+  } catch (error) {
+    if (error.name === "NotFoundError") {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    if (error.name === "ForbiddenError") {
+      return res.sendStatus(httpStatus.FORBIDDEN);
+    }
+  }
+}
