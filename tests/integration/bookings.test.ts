@@ -303,15 +303,7 @@ describe("POST /booking", () => {
 
         expect(response.status).toBe(httpStatus.OK);
         expect(response.body).toEqual({
-          id: expect.any(Number),
-          Room: {
-            id: room.id,
-            name: room.name,
-            capacity: room.capacity,
-            hotelId: room.hotelId,
-            createdAt: room.createdAt.toISOString(),
-            updatedAt: room.updatedAt.toISOString(),
-          },
+          bookingId: expect.any(Number),
         });
       });
 
@@ -570,15 +562,7 @@ describe("PUT /booking/:bookingId", () => {
 
       expect(response.status).toBe(httpStatus.OK);
       expect(response.body).toEqual({
-        id: expect.any(Number),
-        Room: {
-          id: room.id,
-          name: room.name,
-          capacity: room.capacity,
-          hotelId: room.hotelId,
-          createdAt: room.createdAt.toISOString(),
-          updatedAt: room.updatedAt.toISOString(),
-        },
+        bookingId: expect.any(Number),
       });
     });
 
@@ -601,9 +585,10 @@ describe("PUT /booking/:bookingId", () => {
         .set("Authorization", `Bearer ${token}`)
         .send({ roomId: room.id });
 
-      const updatedBooking = await prisma.booking.findFirst({ where: { roomId: room.id } });
+      const updatedBooking = await prisma.booking.findFirst({ where: { id: booking.id } });
 
-      expect(response.body.id).toBe(updatedBooking.id);
+      expect(response.body.bookingId).toBe(updatedBooking.id);
+      expect(updatedBooking.roomId).toBe(room.id);
     });
   });
 });

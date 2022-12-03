@@ -40,7 +40,6 @@ async function createBookingWithUserId(
   roomId: number,
 ): Promise<{
   id: number;
-  Room: Room;
 }> {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
   if (!enrollment) {
@@ -66,7 +65,13 @@ async function createBookingWithUserId(
   return booking;
 }
 
-async function updateBookingWithRoomId(userId: number, bookingId: number, roomId: number) {
+async function updateBookingWithRoomId(
+  userId: number,
+  bookingId: number,
+  roomId: number,
+): Promise<{
+  id: number;
+}> {
   const booking = await bookingRepository.findBookingById(bookingId);
   if (!booking) {
     throw notFoundError();

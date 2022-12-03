@@ -24,7 +24,6 @@ async function createBookingWithUserIdAndRoomId(userId: number, roomId: number) 
     },
     select: {
       id: true,
-      Room: true,
     },
   });
 }
@@ -43,7 +42,6 @@ async function updateBookingWithRoomId(bookingId: number, roomId: number) {
     },
     select: {
       id: true,
-      Room: true,
     },
   });
 }
