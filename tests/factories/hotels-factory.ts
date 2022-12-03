@@ -12,7 +12,7 @@ export async function createHotel() {
 
 export async function createRoom(hotelId?: number, capacity?: number) {
   const incomingHotelId = hotelId || (await createHotel()).id;
-  const incomingCapacity = capacity || faker.datatype.number({ min: 0, max: 4 });
+  const incomingCapacity = capacity || faker.datatype.number({ min: 1, max: 4 });
 
   return prisma.room.create({
     data: {
